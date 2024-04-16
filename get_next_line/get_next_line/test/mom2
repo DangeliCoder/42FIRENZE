@@ -1,0 +1,8 @@
+rm *.out
+cp ../*.h .
+cp ../*.a .
+rm ../*.a
+cc -Wall -Wextra -Werror *.c *.a
+rm *.h
+rm *.a
+

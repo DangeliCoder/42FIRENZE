@@ -1,0 +1,5 @@
+norminette -R CheckForbiddenSourceHeader
+echo
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 -c *.c
+ar -rsv get_next_line.a *.o
+rm *.o
