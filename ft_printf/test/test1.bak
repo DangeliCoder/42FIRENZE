@@ -1,0 +1,79 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test1.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ad-angel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/04 13:08:00 by ad-angel          #+#    #+#             */
+/*   Updated: 2023/12/04 13:08:02 by ad-angel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+#include "libftprintf.h"
+
+void	main1(void)
+{
+	char	*ptr;
+
+	printf("\nft_printf :\n");
+	printf("\n%i\n", ft_printf("Ciao%cAntonio%c", ' ', '!'));
+	printf("\n%i\n", ft_printf("Ciao Antonio!\n%s", "Ok, ciao!"));
+	printf("\n%i\n", ft_printf("|%s|", NULL));
+	ptr = calloc(1, sizeof(int));
+	printf("\n%i\n", ft_printf("%p", ptr));
+	printf("\n%i\n", ft_printf("%p", NULL));
+	printf("\nprintf :\n");
+	printf("%p\n", ptr);
+	printf("%p\n", NULL);
+	free(ptr);
+	printf("\nft_printf :\n");
+	printf("\n%i\n", ft_printf("%i", -7721));
+	printf("\n%i\n", ft_printf("%d", -7721));
+	printf("\n%i\n", ft_printf("%i", INT_MIN));
+	printf("\n%i\n", ft_printf("%d", INT_MIN));
+	printf("\nprintf :\n");
+	printf("%i\n", -7721);
+	printf("%d\n", -7721);
+	printf("%i\n", INT_MIN);
+	printf("%d\n", INT_MIN);
+}
+
+void	main2(void)
+{
+	printf("\nft_printf :\n");
+	printf("\n%i\n", ft_printf("%u", -7721));
+	printf("\n%i\n", ft_printf("%u", INT_MAX));
+	printf("\nprintf :\n");
+	printf("%u\n", -7721);
+	printf("%u\n", INT_MAX);
+	printf("\nft_printf :\n");
+	printf("\n%i\n", ft_printf("%x", INT_MAX));
+	printf("%i\n", ft_printf("%X\n", INT_MAX));
+	printf("%i\n", ft_printf("%X\n", INT_MIN));
+	printf("\nprintf :\n");
+	printf("%x\n", INT_MAX);
+	printf("%X\n", INT_MAX);
+	printf("%X\n", INT_MIN);
+	printf("\nft_printf :\n");
+	printf("\n%i\n", ft_printf("%%"));
+	printf("\nprintf :\n");
+	printf("%%\n");
+	printf("\nft_printf :\n");
+	printf("\n%i\n", ft_printf(" %p %p ", (void *)LONG_MIN, (void *)LONG_MAX));
+	printf("\n%i\n", ft_printf(" %p %p ", (void *)INT_MIN, (void *)INT_MAX));
+	printf("\nprintf :\n");
+	printf(" %p %p \n", (void *)LONG_MIN, (void *)LONG_MAX);
+	printf(" %p %p \n", (void *)INT_MIN, (void *)INT_MAX);
+}
+
+int	main(void)
+{
+	main1();
+	main2();
+	return (0);
+}
