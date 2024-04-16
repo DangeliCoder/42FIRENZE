@@ -1,0 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test4.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ad-angel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/12 17:25:44 by ad-angel          #+#    #+#             */
+/*   Updated: 2023/11/17 15:58:25 by ad-angel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <time.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#include "libft.h"
+
+int	main(int argc, char **argv)
+{
+	int		l;
+	void	*p;
+	char	c;
+
+	srand((unsigned)time(NULL));
+	if (argc < 2)
+		l = 1;
+	else
+		l = atoi(argv[1]);
+	p = calloc(l, sizeof(int));
+	c = (rand() % (127 - 32)) + 32;
+	p = ft_memset(p, c, l);
+	printf("Inizio del dump :\n");
+	while (l > 0)
+	{
+		c = *(char *)p;
+		printf("%c", c);
+		p++;
+		l--;
+	}
+	printf("\n Fine del dump.\n");
+	return (0);
+}

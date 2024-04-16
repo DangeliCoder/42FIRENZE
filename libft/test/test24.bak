@@ -1,0 +1,95 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test24.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ad-angel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/27 14:03:41 by ad-angel          #+#    #+#             */
+/*   Updated: 2023/11/09 12:44:10 by ad-angel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "libft.h"
+
+#define DIM 2
+
+int	check(char const *s1, char const *s2)
+{
+	while (*s1 != '\0' && *s2 != '\0')
+	{
+		if (*s1 != *s2)
+			return (0);
+		s1++;
+		s2++;
+	}
+	if (!(*s1 == '\0' && *s2 == '\0'))
+		return (0);
+	return (1);
+}
+
+char	**init(void)
+{
+	char	**expected;
+
+	expected = malloc(DIM * sizeof(char *));
+	expected[0] = "hello!";
+	expected[1] = (void *)0;
+	return (expected);
+}
+
+int	check_res(char **chunks, char **expected)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < (DIM - 1))
+	{
+		if (!check(expected[i], chunks[i]))
+			break ;
+		i++;
+	}
+	if (i == (DIM - 1))
+		if (chunks[i] == expected[i])
+			i++;
+	return (i);
+}
+
+void	destroy(char **chunks, char **expected)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < DIM)
+	{
+		free(chunks[i]);
+		i++;
+	}
+	free(chunks);
+	free(expected);
+}
+
+int	main(void)
+{
+	char	*str;
+	char	**chunks;
+	char	**expected;
+
+	str = "hello!";
+	chunks = ft_split(str, ' ');
+	if (chunks == NULL)
+		printf("ERROR1!\n");
+	else
+	{
+		expected = init();
+		if (check_res(chunks, expected) != DIM)
+			printf("ERROR2!\n");
+		else
+			printf("OK.\n");
+		destroy(chunks, expected);
+	}
+	return (0);
+}

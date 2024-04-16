@@ -1,0 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test10.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ad-angel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/20 17:48:42 by ad-angel          #+#    #+#             */
+/*   Updated: 2023/10/20 17:48:45 by ad-angel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <time.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#include "libft.h"
+
+int	main(void)
+{
+	char	c;
+
+	srand((unsigned)time(NULL));
+	c = rand() % 128;
+	printf("%c -> %c", c, ft_toupper(c));
+	return (0);
+}

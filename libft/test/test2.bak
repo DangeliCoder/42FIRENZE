@@ -1,0 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test2.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ad-angel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/12 17:25:44 by ad-angel          #+#    #+#             */
+/*   Updated: 2023/11/17 15:56:57 by ad-angel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <time.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#include "libft.h"
+
+int	main(void)
+{
+	char	c;
+
+	srand((unsigned)time(NULL));
+	c = rand() % 128;
+	if (ft_isprint(c))
+		printf("'%c' is a printable character.\n", c);
+	else
+		printf("'%c' isn't a printable character.\n", c);
+	return (0);
+}

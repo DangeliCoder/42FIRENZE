@@ -1,0 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test16.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ad-angel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/27 13:28:45 by ad-angel          #+#    #+#             */
+/*   Updated: 2023/10/27 13:28:47 by ad-angel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdio.h>
+
+#include "libft.h"
+
+int	main(void)
+{
+	char	*str1;
+	char	*str2;
+
+	str1 = "abcdef";
+	str2 = "abc\375xx";
+	if (ft_memcmp((void *)str1, (void *)str2, 5) == 0)
+		printf("Le stringhe '%s' e '%s' sono uguali", str1, str2);
+	if (ft_memcmp((void *)str1, (void *)str2, 5) > 0)
+		printf("La stringa '%s' e' successiva alla stringa '%s'", str1, str2);
+	if (ft_memcmp((void *)str1, (void *)str2, 5) < 0)
+		printf("La stringa '%s' e' precedente alla stringa '%s'", str1, str2);
+	printf(" per i primi 5 caratteri.");
+	return (0);
+}

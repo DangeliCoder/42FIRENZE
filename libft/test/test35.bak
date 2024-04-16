@@ -1,0 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test35.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ad-angel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/16 17:11:52 by ad-angel          #+#    #+#             */
+/*   Updated: 2023/11/20 11:43:41 by ad-angel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "libft.h"
+
+static void	lstdestroy(t_list *head)
+{
+	if (head == NULL)
+		return ;
+	lstdestroy(head->next);
+	free(head->content);
+	free(head);
+}
+
+int	main(void)
+{
+	int		size;
+	int		*n;
+	t_list	*head;
+	t_list	*newnode;
+
+	srand((unsigned)time(NULL));
+	head = NULL;
+	size = 11;
+	while (size > 0)
+	{
+		n = calloc(1, sizeof(int));
+		*n = (rand() % 200) - 100;
+		printf("%i\n", *n);
+		newnode = ft_lstnew(n);
+		ft_lstadd_front(&head, newnode);
+		size--;
+	}
+	printf("Content of the last node = %i\n",
+		*(int *)(ft_lstlast(head)->content));
+	lstdestroy(head);
+	return (0);
+}

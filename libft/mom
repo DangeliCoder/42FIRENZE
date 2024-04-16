@@ -1,0 +1,6 @@
+norminette -R CheckForbiddenSourceHeader
+echo
+cc -Wall -Wextra -Werror -c *.c
+ar -rsv libft.a *.o
+rm *.o
+

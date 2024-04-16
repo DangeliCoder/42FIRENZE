@@ -1,0 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test17.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ad-angel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/27 14:03:41 by ad-angel          #+#    #+#             */
+/*   Updated: 2023/10/27 14:03:43 by ad-angel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdio.h>
+#include <stddef.h>
+
+#include "libft.h"
+
+int	main(void)
+{
+	char	*str1;
+	char	*str2;
+	char	*str3;
+
+	str1 = "aaabcabcd";
+	str2 = "abcd";
+	str3 = ft_strnstr((void *)str1, (void *)str2, 9);
+	if (str3 == NULL)
+		printf("La stringa '%s' non e' presente nella stringa '%s'.\n",
+			str2, str1);
+	else
+		printf("La stringa '%s' e' presente nella stringa '%s'.\n",
+			str3, str1);
+	return (0);
+}

@@ -1,0 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test19.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ad-angel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/02 16:05:06 by ad-angel          #+#    #+#             */
+/*   Updated: 2023/11/02 16:05:09 by ad-angel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+#include "libft.h"
+
+int	main(int argc, char **argv)
+{
+	char	*ptr;
+	size_t	i;
+
+	if (argc < 2)
+		return (0);
+	ptr = ft_calloc(atoi(argv[1]), sizeof(int));
+	*((char *)ptr + (atoi(argv[1]) * sizeof(int))) = '\n';
+	i = 0;
+	while (*(char *)ptr == '\0')
+	{
+		i++;
+		ptr++;
+	}
+	printf("%lu\n", i);
+	return (0);
+}

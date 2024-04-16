@@ -1,0 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test3.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ad-angel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/12 17:25:44 by ad-angel          #+#    #+#             */
+/*   Updated: 2023/11/17 15:57:33 by ad-angel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <time.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#include "libft.h"
+
+int	main(void)
+{
+	char	l;
+	char	*str;
+	char	c;
+
+	srand((unsigned)time(NULL));
+	l = (rand() % 20) + 1;
+	str = (char *)malloc(l);
+	l--;
+	str += l;
+	*str = '\0';
+	str--;
+	l--;
+	while (l >= 0)
+	{
+		c = (rand() % (127 - 32)) + 32;
+		*str = c;
+		str--;
+		l--;
+	}
+	str++;
+	printf("The length of \" %s \" is %zu characters.\n", str, ft_strlen(str));
+	free(str);
+	return (0);
+}

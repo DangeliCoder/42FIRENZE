@@ -1,0 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test29.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ad-angel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/13 17:36:25 by ad-angel          #+#    #+#             */
+/*   Updated: 2023/11/14 17:08:37 by ad-angel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+#include "libft.h"
+
+int	main(void)
+{
+	int		fd;
+	char	*str;
+
+	fd = open("prova2.txt", O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
+	if (fd == -1)
+	{
+		printf("ERROR 1!\n");
+		return (0);
+	}
+	str = "Testo di\nProva 2!";
+	ft_putstr_fd(str, fd);
+	if (close(fd) == -1)
+		printf("ERROR 2!\n");
+	else
+		printf("OK.\n");
+	return (0);
+}

@@ -1,0 +1,85 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test37.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ad-angel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/16 17:11:52 by ad-angel          #+#    #+#             */
+/*   Updated: 2023/11/20 15:10:06 by ad-angel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "libft.h"
+
+static void	fun(void *content)
+{
+	int	n;
+
+	n = *(int *)content;
+	free(content);
+	printf("Function 'fun' called for content : %i.\n", n);
+}
+
+static void	showlst(t_list *head)
+{
+	while (head != NULL)
+	{
+		printf("%i", *((int *)head->content));
+		head = head->next;
+		if (head != NULL)
+			printf(", ");
+		else
+			printf("\n");
+	}
+}
+
+static void	lstdelone(t_list *head, t_list *node)
+{
+	while (head->next != node)
+		head = head->next;
+	head->next = node->next;
+	ft_lstdelone(node, &fun);
+}
+
+static void	lstdestroy(t_list *head)
+{
+	if (head == NULL)
+		return ;
+	lstdestroy(head->next);
+	free(head->content);
+	free(head);
+}
+
+int	main(void)
+{
+	int		size;
+	int		*n;
+	t_list	*head;
+	t_list	*newnode;
+	t_list	*node;
+
+	srand((unsigned)time(NULL));
+	head = NULL;
+	size = 11;
+	while (size > 0)
+	{
+		n = calloc(1, sizeof(int));
+		*n = (rand() % 200) - 100;
+		printf("%i\n", *n);
+		newnode = ft_lstnew(n);
+		ft_lstadd_back(&head, newnode);
+		if (size == 3)
+			node = newnode;
+		size--;
+	}
+	showlst(head);
+	lstdelone(head, node);
+	showlst(head);
+	lstdestroy(head);
+	return (0);
+}

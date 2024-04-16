@@ -1,0 +1,66 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test1.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ad-angel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/10 16:52:10 by ad-angel          #+#    #+#             */
+/*   Updated: 2023/11/17 15:55:33 by ad-angel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <time.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#include "libft.h"
+
+void	main2(int c)
+{
+	if (ft_isalpha(c))
+		printf("'%c' is an alphabetic character.\n", c);
+	else
+		printf("'%c' isn't an alphabetic character.\n", c);
+	printf("\n");
+}
+
+void	main3(int c)
+{
+	if (ft_isdigit(c))
+		printf("'%c' is a digit.\n", c);
+	else
+		printf("'%c' isn't a digit.\n", c);
+	printf("\n");
+}
+
+void	main4(int c)
+{
+	if (ft_isalnum(c))
+		printf("'%c' is an alphanumeric character.\n", c);
+	else
+		printf("'%c' isn't an alphanumeric character.\n", c);
+	printf("\n");
+}
+
+void	main5(int c)
+{
+	if (ft_isascii(c))
+		printf("'%c' is an ASCII character.\n", c);
+	else
+		printf("'%c' isn't an ASCII character.\n", c);
+	printf("\n");
+}
+
+int	main(void)
+{
+	int	c;
+
+	srand((unsigned)time(NULL));
+	c = rand() % 128;
+	main2(c);
+	main3(c);
+	main4(c);
+	main5(c);
+	return (0);
+}

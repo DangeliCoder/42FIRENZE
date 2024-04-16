@@ -1,0 +1,60 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test33.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ad-angel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/16 17:11:52 by ad-angel          #+#    #+#             */
+/*   Updated: 2023/11/17 01:36:40 by ad-angel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "libft.h"
+
+static void	showlst(t_list *head)
+{
+	while (head != NULL)
+	{
+		printf("%i", *((int *)head->content));
+		head = head->next;
+		if (head != NULL)
+			printf(", ");
+		else
+			printf("\n");
+	}
+}
+
+static void	lstdestroy(t_list *head)
+{
+	if (head == NULL)
+		return ;
+	lstdestroy(head->next);
+	free(head->content);
+	free(head);
+}
+
+int	main(void)
+{
+	int		*n;
+	t_list	*head;
+	t_list	*newnode;
+
+	srand((unsigned)time(NULL));
+	n = calloc(1, sizeof(int));
+	*n = (rand() % 200) - 100;
+	printf("%i\n", *n);
+	head = ft_lstnew(n);
+	n = calloc(1, sizeof(int));
+	*n = (rand() % 200) - 100;
+	printf("%i\n", *n);
+	newnode = ft_lstnew(n);
+	ft_lstadd_front(&head, newnode);
+	showlst(head);
+	lstdestroy(head);
+	return (0);
+}

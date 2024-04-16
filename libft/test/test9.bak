@@ -1,0 +1,73 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test9.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ad-angel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/17 10:57:43 by ad-angel          #+#    #+#             */
+/*   Updated: 2023/10/17 10:57:46 by ad-angel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "libft.h"
+
+size_t	tot_len(char *str1, char *str2)
+{
+	size_t	l;
+
+	l = 0;
+	while (*str1 != '\0')
+	{
+		l++;
+		str1++;
+	}
+	l++;
+	while (*str2 != '\0')
+	{
+		l++;
+		str2++;
+	}
+	l++;
+	return (l);
+}
+
+void	main2(char *str3, char *str2, char *str1, size_t l)
+{
+	size_t	n;
+
+	n = ft_strlcpy(str3, str1, sizeof(char) * l);
+	if (n <= (sizeof(char) * l))
+	{
+		n = ft_strlcat(str3, " ", sizeof(char) * l);
+		if (n <= (sizeof(char) * l))
+		{
+			n = ft_strlcat(str3, str2, sizeof(char) * l);
+			if (n <= (sizeof(char) * l))
+			{
+				printf("%s\n", str3);
+				return ;
+			}
+		}
+	}
+	printf("Overflow!\n");
+}
+
+int	main(void)
+{
+	char	*str1;
+	char	*str2;
+	char	*str3;
+	size_t	l;
+
+	str1 = "Ciao Antonio!";
+	str2 = "Va bene.\nBUON LAVORO!";
+	l = tot_len(str1, str2);
+	str3 = malloc(sizeof(char) * l);
+	main2(str3, str2, str1, l);
+	free(str3);
+	return (0);
+}

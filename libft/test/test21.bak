@@ -1,0 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test21.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ad-angel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/27 14:03:41 by ad-angel          #+#    #+#             */
+/*   Updated: 2023/11/07 10:15:23 by ad-angel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+#include "libft.h"
+
+int	main(void)
+{
+	char	*str1;
+	char	*str2;
+
+	str1 = "lorem ipsum dolor sit amet";
+	str2 = ft_substr(str1, 0, 10);
+	if (str2 == NULL)
+		printf("ERROR!\n");
+	else
+	{
+		printf("%s\n", str2);
+		free(str2);
+	}
+	str2 = ft_substr(str1, -1, 10);
+	if (str2 == NULL)
+		printf("ERROR!\n");
+	else
+	{
+		printf("%s\n", str2);
+		free(str2);
+	}
+	return (0);
+}

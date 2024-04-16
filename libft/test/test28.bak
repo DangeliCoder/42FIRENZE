@@ -1,0 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test28.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ad-angel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/13 17:36:25 by ad-angel          #+#    #+#             */
+/*   Updated: 2023/11/13 17:36:42 by ad-angel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <time.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+#include "libft.h"
+
+int	main(void)
+{
+	int		fd;
+	char	c;
+
+	fd = open("prova1.txt", O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
+	if (fd == -1)
+	{
+		printf("ERROR 1!\n");
+		return (0);
+	}
+	srand((unsigned)time(NULL));
+	c = 32 + (rand() % 95);
+	ft_putchar_fd(c, fd);
+	if (close(fd) == -1)
+		printf("ERROR 2!\n");
+	else
+		printf("OK.\n");
+	return (0);
+}

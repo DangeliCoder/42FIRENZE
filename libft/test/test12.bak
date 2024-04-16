@@ -1,0 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test12.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ad-angel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/27 13:25:25 by ad-angel          #+#    #+#             */
+/*   Updated: 2023/10/27 13:25:27 by ad-angel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <time.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#include "libft.h"
+
+int	main(void)
+{
+	char	*str;
+	char	c;
+	char	*r;
+
+	srand((unsigned)time(NULL));
+	str = "Antonio D'Angelico";
+	c = rand() % 128;
+	while (!ft_isprint(c))
+		c = rand() % 128;
+	r = ft_strchr(str, c);
+	if (r == NULL)
+		printf("il carattere '%c' non e' presente nella stringa.", c);
+	else
+		printf("il carattere '%c' e' presente nella stringa.", *r);
+	return (0);
+}
