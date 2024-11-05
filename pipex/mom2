@@ -1,0 +1,6 @@
+norminette -R CheckForbiddenSourceHeader
+echo
+make re
+echo
+./pipex "in" "cat" "cat" "out"
+
