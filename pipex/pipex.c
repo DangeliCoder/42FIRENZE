@@ -44,7 +44,7 @@ int	final_process(int *fd_io, int ind_c, char ***argv_c, char **env)
 	if (pid == 0)
 	{
 		dup2(fd_io[1], 1);
-		execve(argv_c[ind_c][0], argv_c[ind_c], env);
+		command_exec(ind_c, argv_c, env, fd_io);
 	}
 	else
 		wait(NULL);
@@ -84,7 +84,7 @@ int	processes(int *fd_io, int ind_c, char ***argv_c, char **env)
 	if (pid == 0)
 	{
 		pipe_management(1, p);
-		execve(argv_c[ind_c][0], argv_c[ind_c], env);
+		command_exec(ind_c, argv_c, env, fd_io);
 	}
 	else
 	{
