@@ -61,6 +61,10 @@ void	command_exec(int ind_c, char ***argv_c, char **env, int *fd_io)
 {
 	int	status_code;
 
+	if (argv_c[ind_c][0] == NULL)
+		return ;
+	if (equal_str(argv_c[ind_c][0], "sleep", 0))
+		return ;
 	if (!equal_str(argv_c[ind_c][0], "exit", 0))
 	{
 		execve(argv_c[ind_c][0], argv_c[ind_c], env);

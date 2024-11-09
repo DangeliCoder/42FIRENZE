@@ -35,25 +35,33 @@ int	open_files(char *file_input, char *file_output, int *fd_io)
 int	final_process(int *fd_io, int ind_c, char ***argv_c, char **env)
 {
 	pid_t	pid;
+	int		sleep_time;
 
-	if (argv_c[ind_c][0] == NULL)
-		return (0);
 	pid = fork();
 	if (pid < 0)
-		return (1);
+		return (0);
 	if (pid == 0)
 	{
 		dup2(fd_io[1], 1);
 		command_exec(ind_c, argv_c, env, fd_io);
+		return (0);
 	}
+	sleep_time = 0;
+	if (argv_c[ind_c][0] == NULL)
+		return (0);
+	if (!equal_str(argv_c[ind_c][0], "sleep", 0))
+		waitpid(pid, NULL, 0);
 	else
-		wait(NULL);
-	return (0);
+		sleep_time = string_to_num(argv_c[ind_c][1]);
+	return (sleep_time);
 }
 
-void	pipe_management(int child, int *p)
+int	pipe_management(pid_t pid, int *p, int ind_c, char ***argv_c)
 {
-	if (child)
+	int		sleep_time;
+
+	sleep_time = 0;
+	if (pid == 0)
 	{
 		close(p[0]);
 		dup2(p[1], 1);
@@ -62,36 +70,43 @@ void	pipe_management(int child, int *p)
 	{
 		close(p[1]);
 		dup2(p[0], 0);
+		if (argv_c[ind_c][0] == NULL)
+			return (0);
+		if (!equal_str(argv_c[ind_c][0], "sleep", 0))
+			waitpid(pid, NULL, 0);
+		else
+			sleep_time = string_to_num(argv_c[ind_c][1]);
 	}
+	return (sleep_time);
 }
 
 int	processes(int *fd_io, int ind_c, char ***argv_c, char **env)
 {
 	pid_t	pid;
 	int		p[2];
+	int		sleep_time1;
+	int		sleep_time2;
 
-	if (argv_c[ind_c][0] == NULL)
-		return (0);
-	if (ind_c >= argv_c[0][0][0])
+	if (ind_c == argv_c[0][0][0])
 		return (final_process(fd_io, ind_c, argv_c, env));
 	if (ind_c == 1)
 		dup2(fd_io[0], 0);
 	if (pipe(p) < 0)
-		return (1);
+		return (0);
 	pid = fork();
 	if (pid < 0)
-		return (1);
+		return (0);
 	if (pid == 0)
 	{
-		pipe_management(1, p);
+		pipe_management(pid, p, ind_c, argv_c);
 		command_exec(ind_c, argv_c, env, fd_io);
+		return (0);
 	}
-	else
-	{
-		pipe_management(0, p);
-		wait(NULL);
-	}
-	return (processes(fd_io, ind_c + 1, argv_c, env));
+	sleep_time1 = pipe_management(pid, p, ind_c, argv_c);
+	sleep_time2 = processes(fd_io, ind_c + 1, argv_c, env);
+	if (sleep_time1 > sleep_time2)
+		return (sleep_time1);
+	return (sleep_time2);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -113,7 +128,7 @@ int	main(int argc, char **argv, char **env)
 	else
 		commands_status = prepare_commands(argc - 3, &argv_c, argv, env);
 	if (argc == 5)
-		processes(fd_io, 1, argv_c, env);
+		sleep(processes(fd_io, 1, argv_c, env));
 	dealloc_commands(argc - 3, argv_c);
 	close_files(fd_io, "");
 	if (files_status > 0 && files_status != 4)

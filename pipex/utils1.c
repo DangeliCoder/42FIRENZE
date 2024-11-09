@@ -81,7 +81,6 @@ int	prepare_commands(int num_c, char ****argv_c, char **argv, char **env)
 		argv_c2[i][2] = NULL;
 		i++;
 	}
-	i = 1;
 	*argv_c = argv_c2;
 	return (status);
 }

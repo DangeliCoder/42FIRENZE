@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-void	compose_com(char *dest, char *cmd, char *path, int path_len)
+void	compose_commmand(char *dest, char *cmd, char *path, int path_len)
 {
 	int	i;
 	int	j;
@@ -54,7 +54,7 @@ char	*add_path(char *cmd, char **env)
 	delim = search_delim(var_path, ':');
 	while (delim > 0)
 	{
-		compose_com(aux, cmd, var_path, delim);
+		compose_commmand(aux, cmd, var_path, delim);
 		if (access(aux, F_OK | X_OK) != -1)
 			return (aux);
 		var_path += (delim + 1);
@@ -83,28 +83,35 @@ char	*prepare_argument(char *arg1)
 
 int	prepare_command(char **cmd, char **arg2, char *arg1, char **env)
 {
-	*cmd = add_path(arg1, env);
-	if (*cmd == NULL)
+	char	*aux;
+
+	if (!equal_str(arg1, "sleep", 1) && !equal_str(arg1, "sleep ", 1))
+		aux = add_path(arg1, env);
+	else
+		aux = set_string("sleep", '\0');
+	if (aux == NULL)
 	{
 		error_message(arg1, -1);
 		return (127);
 	}
+	*cmd = aux;
 	*arg2 = prepare_argument(arg1);
 	return (0);
 }
 
 int	prepare_command2(char **cmd, char **arg2, char *arg1, char **env)
 {
-	int		status;
 	char	*aux;
 
-	status = 0;
-	if (!equal_str(arg1, "exit", 1) && !equal_str(arg1, "exit ", 1))
+	if (!equal_str(arg1, "exit", 1) && !equal_str(arg1, "exit ", 1)
+		&& !equal_str(arg1, "sleep", 1) && !equal_str(arg1, "sleep ", 1))
 		aux = add_path(arg1, env);
 	else
 	{
-		aux = set_string("exit", '\0');
-		status = -1;
+		if (equal_str(arg1, "sleep", 1) || equal_str(arg1, "sleep ", 1))
+			aux = set_string("sleep", '\0');
+		else
+			aux = set_string("exit", '\0');
 	}
 	if (aux == NULL)
 	{
@@ -112,9 +119,8 @@ int	prepare_command2(char **cmd, char **arg2, char *arg1, char **env)
 		return (127);
 	}
 	*cmd = aux;
-	aux = prepare_argument(arg1);
-	if (status == -1 && aux != NULL)
-		status = string_to_num(aux);
-	*arg2 = aux;
-	return (status);
+	*arg2 = prepare_argument(arg1);
+	if (equal_str(*cmd, "exit", 0) && *arg2 != NULL)
+		return (string_to_num(*arg2));
+	return (0);
 }
