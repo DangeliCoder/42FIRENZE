@@ -1,6 +1,0 @@
-norminette -R CheckForbiddenSourceHeader
-echo
-make re
-echo
-./pipex "in" "dir /" "grep mnt" "out"
-
