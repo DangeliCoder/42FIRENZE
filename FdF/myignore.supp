@@ -1,0 +1,19 @@
+{
+   myignore1
+   Memcheck:Leak
+   ...
+   obj:*libXext*
+}
+{
+   myignore2
+   Memcheck:Leak
+   ...
+   obj:*libX11*
+}
+{
+   myignore3
+   Memcheck:Leak
+   ...
+   obj:*vgpreload_memcheck-amd64-linux*
+}
+

@@ -1,0 +1,5 @@
+norminette --use-gitignore -R CheckForbiddenSourceHeader
+echo
+make re
+echo
+./fdf 42.fdf
