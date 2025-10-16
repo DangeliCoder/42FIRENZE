@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>
+		function myFunction1() {
+		  document.getElementById("part").src = "page1.html";
+		}
+		function myFunction2() {
+		  document.getElementById("part").src = "page2.html";
+		}
+		function myFunction3() {
+		  document.getElementById("part").src = "page3.html";
+		}
+	</script>
+</head>
+<body>
+	<center><table style="width:100%">
+		<tr>
+			<center><h1>Curriculum Vitae</h1></center>
+		</tr>
+		<tr style="height:200px">
+			<td style="width:33%"><button style="width:100%;height:200px" onclick="myFunction1()"><h2>Generalita'</h2></button></td>
+			<td style="width:33%"><button style="width:100%;height:200px" onclick="myFunction2()"><h2>Esperienze e Competenze Professionali</h2></button></td>
+			<td style="width:33%"><button style="width:100%;height:200px" onclick="myFunction3()"><h2>Contatti</h2></button></td>
+		</tr>
+	  </table></center>
+	  <center><iframe id="part" src="" style="width:100%;height:500px"></iframe></center>
+</body>
+</html>
