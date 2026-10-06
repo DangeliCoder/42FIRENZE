@@ -1,0 +1,5 @@
+norminette -R CheckForbiddenSourceHeader *.c *.h
+echo
+make re
+echo
+./push_swap 4 3 2 1
